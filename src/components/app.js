@@ -9,7 +9,7 @@ import Sports from './sports';
 export default class App extends Component {
     constructor(){
         super();
-    };
+    }
 
     handleRoute = (e) => {
         this.currentUrl = e.url;
@@ -23,7 +23,7 @@ export default class App extends Component {
             <FrontPage path="/" data={[]} />
             <Obits path="/obits/" data={[]} />
             <Ads path="/ads/" data={[]} />
-            <Sports path="/sports/" data={[]} />            
+            <Sports path="/sports/" data={[]} />
             </Router>
             </div>
         );
