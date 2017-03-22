@@ -2,65 +2,46 @@ import { h, Component } from 'preact';
 import React from 'react'; //aliased, for proptypes
 import style from './style';
 import loremipsum from 'lorem-ipsum';
+import loremtemplate from 'loremtemplate';
 import ColumnBox from '../columnbox';
 import TitledArticle from '../titledarticle';
+import _ from 'lodash';
+import SubArticle from '../subarticle';
 
 export default class FrontPage extends Component {
     //snippet::proptypes
 
-        loremTemplate = {
-            count: 3,
-            units: 'paragraphs',
-            sentenceLowerBound: 5,
-            sentenceUpperBound: 15,
-            paragraphLowerBound: 3,
-            paragraphUpperBound: 7,
-            format: 'plain',
-            suffix: null
-        };
     
     constructor(props){
         super(props);
         //modify with this.setState
-        this.state = {
-            
-        };
+        this.state = { };
 
         //if necessary, bind methods
         //this.aFunc = this.aFunc.bind(this)
     }
 
+    titles = [
+        "Man Bites Dog",
+        "Robbery at Thieves Guild",
+        "Senior Fools Guild Member Commits Suicide",
+        "Another Barbarian Invasion?"
+    ];
+
+    
     genMainAndArticles() {
+        let subarticles = _.fill(Array(4),0).map((d)=><SubArticle title={_.sample(this.titles)}/>);
+        
         return (
             <span>
-            <TitledArticle title="Patrician Accused of Murder">
-            <h2>Found Unconscious With A Bloody Dagger</h2> 
-            <div class={style.text}>{loremipsum(this.loremTemplate)}</div>
-            <h3>"I saw nuffink" Says Street Urchin (age 12)</h3>
-            <div class={style.text}>{loremipsum(this.loremTemplate)}</div>
-            </TitledArticle>
+            <TitledArticle title="Patrician Accused of Murder" lede="Found Unconscious with a Bloody Dagger" quotes={['"I saw nuffink" says Street Urchin (about age 12)']} />
             <div class={style.divLine}/>
             <ColumnBox>
-            {this.genSubArticle()}
-            {this.genSubArticle()}
-            {this.genSubArticle()}
+                {subarticles}
             </ColumnBox>
             </span>
         );
     }
-
-    genSubArticle(){
-        return (
-            <span>
-            <h2>Man Bites Dog</h2>
-            <div class={style.text}>
-                {loremipsum(this.loremTemplate)}
-                <div class={style.hline_light} />
-            </div>
-            </span>
-        );
-    }
-    
     
     //Don't forget to destructure:
     render(props, state){

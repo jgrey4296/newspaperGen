@@ -39,6 +39,7 @@ export default class Header extends Component {
             <header>
                 <div class={style.vline}><h1>{this.genTitle()}</h1></div>
                 <h2>{this.genQuote()}</h2>
+                <div class={style.wrapper_head}>
             <div class={style.navBox}>
                 <h3>{this.genDate()}{this.genCost()}</h3>
                 <nav>
@@ -47,7 +48,8 @@ export default class Header extends Component {
                 <Link href="/ads/">Advertisements</Link>
                 <Link href="/sports/">Sport Results</Link>
             </nav>
-            </div>
+                </div>
+                </div>
             <div class={style.divLine} />
             <div class={style.divLine} />
             </header>
