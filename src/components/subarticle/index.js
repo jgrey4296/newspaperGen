@@ -31,13 +31,13 @@ export default class SubArticle extends Component {
         let name = _.sample(this.names);
         return (
             <span>
-            <div class={style.wrapper}>
+            <div className={style.wrapper}>
             <h2>{title}</h2>
             <h4> by {name}</h4>
             </div>
-            <div class={style.text}>
+            <div className={style.text}>
             {loremipsum(loremtemplate)}
-            <div class={style.hline_light} />
+            <div className={style.hline_light} />
             </div>
             </span>
         );

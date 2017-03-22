@@ -26,21 +26,21 @@ export default class Header extends Component {
     }
     
     genDate(){
-        return "4th Grune, Century of the Fruitbat."
+        return "4th Grune, Century of the Fruitbat.";
     }
 
     genCost(){
-        return <span class={style.cost}>$0 3p</span>;
+        return <span className={style.cost}>$0 3p</span>;
     }
     
     //Don't forget to destructure:
     render(props, state){
         return (
-            <header>
-                <div class={style.vline}><h1>{this.genTitle()}</h1></div>
+                <header>
+                <div className={style.vline}><h1>{this.genTitle()}</h1></div>
                 <h2>{this.genQuote()}</h2>
-                <div class={style.wrapper_head}>
-            <div class={style.navBox}>
+                <div className={style.wrapper_head}>
+            <div className={style.navBox}>
                 <h3>{this.genDate()}{this.genCost()}</h3>
                 <nav>
                 <Link href="/">Front Page</Link>
@@ -50,8 +50,8 @@ export default class Header extends Component {
             </nav>
                 </div>
                 </div>
-            <div class={style.divLine} />
-            <div class={style.divLine} />
+            <div className={style.divLine} />
+            <div className={style.divLine} />
             </header>
         );
     }

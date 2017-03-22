@@ -35,7 +35,7 @@ export default class FrontPage extends Component {
         return (
             <span>
             <TitledArticle title="Patrician Accused of Murder" lede="Found Unconscious with a Bloody Dagger" quotes={['"I saw nuffink" says Street Urchin (about age 12)']} />
-            <div class={style.divLine}/>
+            <div className={style.divLine}/>
             <ColumnBox>
                 {subarticles}
             </ColumnBox>
@@ -46,7 +46,7 @@ export default class FrontPage extends Component {
     //Don't forget to destructure:
     render(props, state){
         return (
-            <div class={style.frontpage}>
+            <div className={style.frontpage}>
             {this.genMainAndArticles()}
             </div>
         );

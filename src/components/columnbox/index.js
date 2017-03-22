@@ -19,7 +19,7 @@ export default class ColumnBox extends Component {
     //Don't forget to destructure:
     render({children}, state){
         return (
-                <div class={style.columnizedBox}>
+                <div className={style.columnizedBox}>
                 {children}
             </div>
                 
