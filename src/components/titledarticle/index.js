@@ -22,19 +22,29 @@ export default class TitleArticle extends Component {
 
     //Don't forget to destructure:
     render({title, lede, quotes}, state){
-        let quoteHeadings = quotes.map(d=><h3>{d}</h3>),
-            loremParagraphs = _.fill(Array(quotes.length + 1),0).map(d=><div class={style.text}>{loremipsum(loremtemplate)}</div>),
+        let picture = (
+            <div style="display:block; page-break-inside: avoid">
+            <div class={style.hline} />
+            <img src="assets/8eye.png" alt="There should be an image here"/>
+            <div class={style.hline} />
+            </div>
+        ),
+            quoteHeadings = quotes.map(d=><h3>{d}</h3>),
+            loremParagraphs = _.fill(Array(quotes.length + 1),0).map(d=><div className={style.text}>{loremipsum(loremtemplate)}</div>),
             interleaved = _.flatten(_.zip(loremParagraphs,quoteHeadings));
+        //add the picture in somewhere in the story
+        interleaved.splice(_.random(interleaved.length),0,picture);
+        
         
         return (
-                <div class={style.mainArticle}>
+                <div className={style.mainArticle}>
                 <h1>{title}</h1>
                 <h4> by Moist Von Lipwig </h4>
                 <ColumnBox value="main">
                 <h2>{lede}</h2>
                 {interleaved}
             </ColumnBox>
-                <div class={style.hline}></div>
+                <div className={style.hline}></div>
                 </div>
         );
     }
