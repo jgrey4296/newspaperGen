@@ -10,6 +10,7 @@ import V8LazyParseWebpackPlugin from 'v8-lazy-parse-webpack-plugin';
 import FlowBabelWebpackPlugin from 'flow-babel-webpack-plugin';
 const ENV = process.env.NODE_ENV || 'development';
 
+const DEPLOY_PATH = ENV==='production' ? '/newspaper/' : '/';
 const CSS_MAPS = ENV!=='production';
 
 module.exports = {
@@ -17,13 +18,13 @@ module.exports = {
 	entry: './index.js',
 
 	output: {
-		path: path.resolve(__dirname, "build"),
-		publicPath: '/',
+		path: path.resolve(__dirname, "newspaper"),
+		publicPath: DEPLOY_PATH,
 		filename: 'bundle.js'
 	},
 
 	resolve: {
-		extensions: ['', '.jsx', '.js', '.json', '.less'],
+		extensions: ['', '.jsx', '.js', '.json', '.less','.png'],
 		modulesDirectories: [
 			path.resolve(__dirname, "src/lib"),
 			path.resolve(__dirname, "node_modules"),
@@ -32,6 +33,7 @@ module.exports = {
 		alias: {
 			components: path.resolve(__dirname, "src/components"),    // used for tests
 			style: path.resolve(__dirname, "src/style"),
+            '~' : path.resolve(__dirname,'src'),
 			'react': 'preact-compat',
 			'react-dom': 'preact-compat'
 		}
@@ -54,7 +56,8 @@ module.exports = {
 			{
 				// Transform our own .(less|css) files with PostCSS and CSS-modules
 				test: /\.(less|css)$/,
-				include: [path.resolve(__dirname, 'src/components')],
+				include: [path.resolve(__dirname, 'src/components'),
+                          path.resolve(__dirname, 'src/assets')],
 				loader: ExtractTextPlugin.extract('style?singleton', [
 					`css-loader?modules&importLoaders=1&sourceMap=${CSS_MAPS}`,
 					'postcss-loader',
@@ -80,7 +83,8 @@ module.exports = {
 			},
 			{
 				test: /\.(svg|woff2?|ttf|eot|jpe?g|png|gif)(\?.*)?$/i,
-				loader: ENV==='production' ? 'file?name=[path][name]_[hash:base64:5].[ext]' : 'url'
+                include: path.resolve(__dirname,"src"),
+                loader: ENV=='production' ? 'file-loader?mimetype=image' : 'url-loader?mimetype=image'
 			}
 		]
 	},
@@ -132,22 +136,24 @@ module.exports = {
 			// this is actually the property name https://github.com/kimhou/replace-bundle-webpack-plugin/issues/1
 			partten: /throw\s+(new\s+)?[a-zA-Z]+Error\s*\(/g,
 			replacement: () => 'return;('
-		}]),
-		new OfflinePlugin({
+		}])
+		,  new OfflinePlugin({
 			relativePaths: false,
+            
 			AppCache: false,
 			excludes: ['_redirects'],
 			ServiceWorker: {
+                scope: DEPLOY_PATH,
 				events: true
 			},
 			cacheMaps: [
 				{
 					match: /.*/,
-					to: '/',
+					to: DEPLOY_PATH,
 					requestTypes: ['navigate']
-				}
+				},
 			],
-			publicPath: '/'
+            publicPath: DEPLOY_PATH
 		})
 	] : []),
 
