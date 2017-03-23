@@ -23,7 +23,6 @@ export default class TitleArticle extends Component {
 
     //Don't forget to destructure:
     render({title, lede, quotes}, state){
-        console.log('imageURL: ',imageURL);
         let picture = (
                 <div className={style.imgWrap}>
                 <div className={style.hline} />
