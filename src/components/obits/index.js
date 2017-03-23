@@ -21,7 +21,7 @@ export default class Obits extends Component {
 
     titles = [
         "Lord Selachi, Dead at 60",
-        "Mrs Windingthorpe, Leaves everything to her cats",
+        "Mrs Windingthorpe, Leaves everything to her cats"
     ];
 
     

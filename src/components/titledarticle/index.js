@@ -5,6 +5,7 @@ import ColumnBox from '../columnbox';
 import loremipsum from 'lorem-ipsum';
 import loremtemplate from 'loremtemplate';
 import _ from 'lodash';
+import imageURL from '~/assets/8eye';
 
 export default class TitleArticle extends Component {
     //snippet::proptypes
@@ -22,12 +23,13 @@ export default class TitleArticle extends Component {
 
     //Don't forget to destructure:
     render({title, lede, quotes}, state){
+        console.log('imageURL: ',imageURL);
         let picture = (
-            <div style="display:block; page-break-inside: avoid">
-            <div class={style.hline} />
-            <img src="assets/8eye.png" alt="There should be an image here"/>
-            <div class={style.hline} />
-            </div>
+                <div className={style.imgWrap}>
+                <div className={style.hline} />
+                <img src={imageURL} alt="There should be an image here"/>
+                <div className={style.hline} />
+                </div>
         ),
             quoteHeadings = quotes.map(d=><h3>{d}</h3>),
             loremParagraphs = _.fill(Array(quotes.length + 1),0).map(d=><div className={style.text}>{loremipsum(loremtemplate)}</div>),
