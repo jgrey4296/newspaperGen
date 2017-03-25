@@ -7,6 +7,7 @@ import ColumnBox from '../columnbox';
 import TitledArticle from '../titledarticle';
 import _ from 'lodash';
 import SubArticle from '../subarticle';
+import tracery from 'tracery-grammar';
 
 export default class FrontPage extends Component {
     //snippet::proptypes
@@ -16,21 +17,28 @@ export default class FrontPage extends Component {
         super(props);
         //modify with this.setState
         this.state = { };
+        this.grammar = tracery.createGrammar({
+            creature : "Man Dog Cat Demon Werewolf Vampire Ghoul Zombie Aristocrat Lawyer".split(' '),
+            crime : "Murder Theft Robbery Mugging Assault Corruption Graft Insanity".split(' '),
+            guild : 'Thieves Assassins Bakers Seamstresses Musicians'.split(' '),
+            guildhall : '#guild# Guild',
+            temple : "Small Gods",
+            location: "#guildhall# Palace #temple#".split(' '),
+            title : [
+                "#creature# bites #creature#",
+                '#crime# at #location#',
+                'Senior Fools Guild Member Commits Suicide',
+                'Another Barbarian Invasion?'
+            ],
+        });
 
+        
         //if necessary, bind methods
         //this.aFunc = this.aFunc.bind(this)
     }
 
-    titles = [
-        "Man Bites Dog",
-        "Robbery at Thieves Guild",
-        "Senior Fools Guild Member Commits Suicide",
-        "Another Barbarian Invasion?"
-    ];
-
-    
     genMainAndArticles() {
-        let subarticles = _.fill(Array(4),0).map((d)=><SubArticle title={_.sample(this.titles)}/>);
+        let subarticles = _.fill(Array(4),0).map((d)=><SubArticle title={this.grammar.flatten('#title#')}/>);
         
         return (
             <span>

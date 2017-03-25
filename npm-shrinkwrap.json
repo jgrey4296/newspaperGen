@@ -7209,6 +7209,12 @@
       "resolved": "https://registry.npmjs.org/tough-cookie/-/tough-cookie-2.3.2.tgz",
       "dev": true
     },
+    "tracery-grammar": {
+      "version": "2.7.3",
+      "from": "tracery-grammar@latest",
+      "resolved": "https://registry.npmjs.org/tracery-grammar/-/tracery-grammar-2.7.3.tgz",
+      "dev": true
+    },
     "trim-newlines": {
       "version": "1.0.0",
       "from": "trim-newlines@>=1.0.0 <2.0.0",
